@@ -29,9 +29,10 @@ const PostWidget = ({ categories, slug }) => {
     // creating jsx for PostWidget to call component from home and inside the specific article then we will pass the Props
     return (
         <div className="bg-white shadow-lg rounded-lg p-8 pb-12 mb-8">
-          <h3 className="text-xl mb-8 font-semibold border-b pb-4">{slug ? 'Related Posts' : 'Recent Posts'}</h3>
-          {relatedPosts.map((post, index) => (
-            <div key={index} className="flex items-center w-full mb-4">
+        <h3 className="text-xl mb-8 font-semibold border-b pb-4">{slug ? 'Related Posts' : 'Recent Posts'}
+        </h3>
+          {relatedPosts.map((post) => (
+            <div key={post.title} className="flex items-center w-full mb-4">
               <div className="w-16 flex-none">
                 <Image
                   //loader={grpahCMSImageLoader}
