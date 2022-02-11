@@ -60,13 +60,25 @@ export const getPosts =  async () => {
  }
 
  export const getSimilarPost = async () => {
+     // do not show the current article but disply other articles that include some of the categories that you want to get. then we want to get last 3 articles.
+
      const query = gql ` 
      query GetPostDetails($slug:String!
         $categories:[String!]){
             posts(
                 where:{ slug_not: $slug, AND :{categories_some: {slug_in:$categories}}} 
                 last:3
-            ) 
+            ) {
+                title
+                featuredImage {
+                url
+                }
+                createdAt
+                slug
+            }
         }
-     ` // do not show the current article but disply other articles that include some of the categories that you want to get. then we want to get last 3 articles.
+     ` 
+     const result = await request(graphqlAPI, query)
+        return result.posts; 
+        
  }
