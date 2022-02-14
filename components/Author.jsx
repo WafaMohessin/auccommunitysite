@@ -20,7 +20,7 @@ const Author = ({ author }) => (
         {author.name}
     </h3>
     <p className="text-white text-ls">
-        {author.bio}
+        {author.description}
     </p>
   </div>
 );
