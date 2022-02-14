@@ -1,5 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import moment from 'moment';
+/** *************************************************************
+ * Any file inside the folder pages/api is mapped to /api/* and * 
+ * will be treated as an API endpoint instead of a page.        *
+ * ************************************************************ */
+
+import { GraphQLClient, gql } from "graphql";
+
+
+const graphqlAPI = process.env. NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
+
+//authenticate our graphQLClinent author 
+export default function comments (req, res) {
+  const { name, email, slug, comment } = req.body;
+  const graphQLClient = new GraphQLClient (graphqlAPI, {
+    headers: {
+    authorization: `Bearer ${process.env.GRAPQL_TOKEN}`
+    }
+  })
+
+  const query = gql `
+    mutation CraeteComment ($name:String!, $email:String!, $comment:String!, $slug:String!) {
+      createComment (data: {name: $name, email:$email, comment: $comment, post: { connect: {slug: $slug} } } ) {id}
+    }
+  `
+  const  result = await graphQLClient.request(query, req.body)
+  return res.status(200). send(result);
+}
+
+
+/*import moment from 'moment';
 import parse from 'html-react-parser';
 
 import { getComments } from '../services';
@@ -41,3 +69,4 @@ const Comments = ({ slug }) => {
 };
 
 export default Comments;
+ */
