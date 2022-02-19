@@ -58,5 +58,5 @@ export async function getStaticPaths () {
         paths: posts(({node: {slug}}) => ({params: {slug}})),
         fallback:true,
         
-    } // what type of article we are going to have
+    }; // what type of article we are going to have
 }

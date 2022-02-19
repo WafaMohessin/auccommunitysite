@@ -62,19 +62,6 @@ const PostCard = ({ post }) => (
 
 export default PostCard;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* import React from 'react';
 //import Image from 'next/image';
 import moment from 'moment';
